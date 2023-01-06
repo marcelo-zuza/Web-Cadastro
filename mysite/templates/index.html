@@ -1,0 +1,66 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+    {% bootstrap_css %}
+    
+</head>
+<body>
+    <div class="container">
+        <h1>PÁGINA PRINCIPAL</h1>
+        <br>
+        <h4>VEJA ABAIXO NOSSOS PRODUTOS DISPONÍVEIS</h4>
+        
+        <!-Este é um modelo de tabela retirado da página do Bootstrap--->
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Estoque</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for itens in produto %}
+                    <tr>
+                        <td scope="row">{{ itens.id }}</td>
+                        <!--Aqui é colocado um 'modal' para associar uma foto ao clicar no produto-->
+                        <td scope="row"><a href="#modal{{itens.id}}" data-toggle="modal"> {{ itens.nome }}</a></td>
+                        <td scope="row">{{ itens.preco }}</td>
+                        <td scope="row">{{ itens.estoque }}</td>
+                    
+                    </tr>
+                    <!--O modelo de modal como foi apresentado foi retirado da página do Bootstrap-->
+                    <!--'modal' é uma janela que se abre para exibir algum conteúdo-->
+                    <div class="modal fade bd-example-modal-lg show" id="modal{{itens.id}}" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="dynamic-content">
+                                    <img src="{{ itens.imagem.url }}" class="img-fluid" alt="{{ itens.nome }}">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'produto' %}">Cadastre um produto</a>
+            <br>
+            <a href="{% url 'contato' %}">Tem alguma DÚVIDA ou SUGESTÃO? Fale conosco!</a>
+    </div>
+    
+    
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

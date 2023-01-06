@@ -1,0 +1,33 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CONTATO</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+        <h1>CONTATO</h1>
+        <h4>Em caso de dúvidas e sugestões nos envie um email utilizando os campos abaixo:</h4>
+        
+        {% bootstrap_messages %}
+        <form action="{% url 'contato' %}" method="post" class="form" autocomplete="off">
+            <!--Use csrf_token como protocolo de segurança essencial para o funcionamento-->
+            {% csrf_token %}
+            <!--E esse comando abaixo conecta os dados com o formulario-->
+            {% bootstrap_form form %}
+            <!--E crie o botão para submeter os dados-->
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            {% endbuttons %}
+        </form>
+        <div class="container">
+            <a href="{% url 'index' %}">Volte para a página principal</a>
+        </div>
+    </div>
+
+
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>
